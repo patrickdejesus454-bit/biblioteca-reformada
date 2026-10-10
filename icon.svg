@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#174b6b"/><stop offset="1" stop-color="#071b2d"/></linearGradient><linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0c8"/><stop offset="1" stop-color="#d9ad55"/></linearGradient></defs>
+<rect width="512" height="512" rx="108" fill="url(#bg)"/>
+<path d="M256 65v95M218 103h76" fill="none" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+<path d="M92 222Q166 198 246 242V353Q166 310 92 335Z" fill="url(#gold)" stroke="#fff0c8" stroke-width="5" stroke-linejoin="round"/>
+<path d="M420 222Q346 198 266 242V353Q346 310 420 335Z" fill="url(#gold)" stroke="#fff0c8" stroke-width="5" stroke-linejoin="round"/>
+<path d="M256 242V354M78 357Q170 331 256 374Q342 331 434 357" fill="none" stroke="#f4d48e" stroke-width="11" stroke-linecap="round"/>
+<path d="M113 242l-22 83M399 242l22 83" stroke="#fff0c8" stroke-width="8" stroke-linecap="round"/>
+<path d="M124 393h264" stroke="#d9ad55" stroke-width="5" stroke-linecap="round"/>
+<text x="256" y="430" fill="#fff0c8" font-family="Georgia,serif" font-size="27" font-weight="bold" text-anchor="middle" letter-spacing="2">BIBLIOTECA</text>
+<text x="256" y="463" fill="#fff0c8" font-family="Georgia,serif" font-size="25" text-anchor="middle" letter-spacing="4">REFORMADA</text>
+</svg>

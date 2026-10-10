@@ -2,15 +2,35 @@
 <html lang="pt">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#102f4a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-192.png">
 <meta name="description" content="Biblioteca Reformada: artigos e estudos escritos sobre a Bíblia, teologia reformada, história da Igreja e apologética cristã.">
 <title>Biblioteca Reformada</title>
 <style>
-:root{--green:#263b32;--green2:#3c5849;--cream:#f5f1e8;--paper:#fffdf8;--ink:#242821;--muted:#646b63;--line:#e5e0d5}
+:root{--green:#102f4a;--green2:#1b5275;--cream:#f3f6f8;--paper:#ffffff;--ink:#17232d;--muted:#586873;--line:#dce5eb;--gold:#e7c47b}
 *{box-sizing:border-box}
 body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-header{background:var(--green);color:white;padding:48px 20px 42px;text-align:center}
+header{background:linear-gradient(145deg,#0b2339,#164b6b);color:white;padding:38px 20px 34px;text-align:center;border-bottom:4px solid var(--gold);padding-top:calc(30px + env(safe-area-inset-top))}
 .wrap{width:min(100% - 32px,980px);margin:auto}
+html{scroll-behavior:smooth}
+body{padding-bottom:env(safe-area-inset-bottom)}
+.searchbox{display:block;width:100%;max-width:620px;margin:22px auto 0;padding:14px 16px;border:1px solid #d8e1e7;border-radius:14px;background:#fff;color:#17232d;font:inherit;box-shadow:0 4px 16px #001b2b12}
+.searchbox:focus{outline:3px solid #b8d7e8}
+.card{box-shadow:0 3px 14px #17354b0b;transition:transform .18s ease,box-shadow .18s ease}
+.card:active{transform:scale(.99)}
+.card[hidden]{display:none}
+.section-label{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--green2)}
+.symbol{background:#e5eff5;color:var(--green)}
+.motto{color:#f1d99e}
+footer{padding-bottom:calc(22px + env(safe-area-inset-bottom))}
+@media(min-width:700px){header{padding-top:48px;padding-bottom:42px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card{transition:none}}
 .eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:.75rem;color:#d9e3da;font-weight:700}
 h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.1rem,7vw,3.6rem);line-height:1.12;margin:12px 0}
 header p{max-width:620px;margin:12px auto;color:#e7ece7}
@@ -43,8 +63,10 @@ footer p{margin:4px}
 </header>
 <main class="wrap">
   <section class="intro">
+    <div class="section-label">A tua biblioteca de leitura</div>
     <h2>Escolha um tema para começar</h2>
-    <p>Estas ligações abrem os artigos nos sites originais. O conteúdo continua alojado e mantido pelos respetivos editores.</p>
+    <p>Encontra recursos escritos sobre a Bíblia, a tradição reformada e a vida cristã.</p>
+    <input id="pesquisa" class="searchbox" type="search" placeholder="Pesquisar por tema…" aria-label="Pesquisar temas da biblioteca">
   </section>
   <section class="grid" aria-label="Categorias de leitura">
     <article class="card">
@@ -84,11 +106,30 @@ footer p{margin:4px}
       <a href="https://ministeriofiel.com.br/" target="_blank" rel="noopener">Encontrar leituras ↗</a>
     </article>
   </section>
+  <div id="sem-resultados" class="note" hidden>Não encontrámos uma categoria correspondente. Experimenta outra palavra.</div>
   <div class="note"><strong>Nota:</strong> esta página reúne ligações para leitura online; não copia nem republica os artigos. A disponibilidade, o idioma e eventuais requisitos de acesso dependem de cada site. Alguns sites também publicam vídeos ou áudio, por isso escolha as secções de artigos escritos.</div>
 </main>
 <footer>
   <p><strong>Biblioteca Reformada</strong></p>
   <p>Uma página pessoal de acesso a recursos escritos da tradição reformada.</p>
 </footer>
+<script>
+const pesquisa = document.getElementById('pesquisa');
+const cards = Array.from(document.querySelectorAll('.card'));
+const semResultados = document.getElementById('sem-resultados');
+pesquisa.addEventListener('input', () => {
+  const termo = pesquisa.value.trim().toLocaleLowerCase('pt');
+  let visiveis = 0;
+  cards.forEach(card => {
+    const corresponde = card.textContent.toLocaleLowerCase('pt').includes(termo);
+    card.hidden = !corresponde;
+    if (corresponde) visiveis++;
+  });
+  semResultados.hidden = visiveis !== 0;
+});
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {}));
+}
+</script>
 </body>
 </html>
